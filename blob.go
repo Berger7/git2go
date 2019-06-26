@@ -26,6 +26,10 @@ func (v *Blob) Size() int64 {
 	return ret
 }
 
+func (v *Blob) Binary() int {
+	return int(C.git_blob_is_binary(v.cast_ptr))
+}
+
 func (v *Blob) Contents() []byte {
 	size := C.int(C.git_blob_rawsize(v.cast_ptr))
 	buffer := unsafe.Pointer(C.git_blob_rawcontent(v.cast_ptr))
